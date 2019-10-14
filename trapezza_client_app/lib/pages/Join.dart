@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qrcode_reader/qrcode_reader.dart';
+import "package:graphql_flutter/graphql_flutter.dart";
+import 'package:trapezza_client_app/graphql/GraphqlConfiguration.dart';
+import 'package:trapezza_client_app/graphql/QueryMutation.dart';
 
 class Join extends StatefulWidget {
   JoinState createState(){
@@ -8,6 +11,7 @@ class Join extends StatefulWidget {
 }
 
 class JoinState extends State<Join> {
+  GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
   String _qrCodeData = "";
 
@@ -23,8 +27,35 @@ class JoinState extends State<Join> {
     futureString.then((value) {
       print("qr-code value: $value");
 
-      _qrCodeData = value;
+      setState(() {
+        _qrCodeData = value;
+      });
+
+      checkSession();
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    //checkSession();
+  }
+
+  void checkSession() async {
+    QueryMutation queryMutation = QueryMutation();
+    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+    QueryResult result = await _client.mutate(
+      MutationOptions(
+        document: queryMutation.checkSession("xx8ew", "1234"),
+      ),
+    );
+
+    if (!result.hasErrors) {
+      bool isSessionValid = result.data["addClient"];
+
+      print('session status: $isSessionValid');
+    }
   }
   
   @override
@@ -51,7 +82,7 @@ class JoinState extends State<Join> {
               ,
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(_qrCodeData, textAlign: TextAlign.center,),
+                child: Text("Session code: $_qrCodeData", textAlign: TextAlign.center,),
               )
               ,
             ],
