@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  graphql_flutter: ^2.0.0
   qrcode_reader: ^0.4.4
   flutter:
     sdk: flutter
