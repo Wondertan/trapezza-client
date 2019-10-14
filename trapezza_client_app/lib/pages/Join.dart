@@ -9,6 +9,8 @@ class Join extends StatefulWidget {
 
 class JoinState extends State<Join> {
 
+  String _qrCodeData = "";
+
   String scanQrCode(){
     Future<String> futureString = new QRCodeReader()
         .setAutoFocusIntervalInMs(200) // default 5000
@@ -20,21 +22,40 @@ class JoinState extends State<Join> {
     
     futureString.then((value) {
       print("qr-code value: $value");
+
+      _qrCodeData = value;
     });
   }
   
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black38,
-      child: FlatButton(
-        onPressed: () {
-          scanQrCode();
-        },
-        child: Text(
-          "Scan Qr",
+    return Scaffold(
+        appBar: new AppBar(
+          title: new Text('QR Code Scanner'),
         ),
-      )
-    );
+        body: new Center(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: RaisedButton(
+                    color: Colors.blue,
+                    textColor: Colors.white,
+                    splashColor: Colors.blueGrey,
+                    onPressed: scanQrCode,
+                    child: const Text('START SCAN')
+                ),
+              )
+              ,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: Text(_qrCodeData, textAlign: TextAlign.center,),
+              )
+              ,
+            ],
+          ),
+        ));
   }
 }
