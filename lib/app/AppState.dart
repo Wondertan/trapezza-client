@@ -17,21 +17,10 @@ class AppState extends State<App> {
 
     switch (_currentPageIndex) {
       case 0: return Events();
-      break;
-
       case 1: return Restaurants();
-      break;
-
       case 2: return Join();
-      break;
-
       case 3: return Friends();
-      break;
-
       case 4: return Profile();
-      break;
-
-      default: return Restaurants();
     }
   }
 
@@ -46,6 +35,7 @@ class AppState extends State<App> {
             centerTitle: true,
             backgroundColor: Colors.redAccent,
           ),
+
 
           body: callPage(),
           bottomNavigationBar: Theme(
@@ -64,13 +54,8 @@ class AppState extends State<App> {
               type: BottomNavigationBarType.fixed,
 
               onTap: (value) {
-
-                print(value);
-
-                _currentPageIndex = value;
-
                 setState(() {
-
+                  _currentPageIndex = value;
                 });
               },
 
