@@ -31,7 +31,7 @@ class JoinState extends State<Join> {
         _qrCodeData = value;
       });
 
-      checkSession();
+      addClient();
     });
   }
 
@@ -40,12 +40,12 @@ class JoinState extends State<Join> {
     super.initState();
   }
 
-  void checkSession() async {
+  void addClient() async {
     QueryMutation queryMutation = QueryMutation();
     GraphQLClient _client = graphQLConfiguration.clientToQuery();
     QueryResult result = await _client.mutate(
       MutationOptions(
-        document: queryMutation.checkSession("xx8ew1", "1234"),
+        document: queryMutation.checkSession(_qrCodeData, "1234"),
       ),
     );
 
