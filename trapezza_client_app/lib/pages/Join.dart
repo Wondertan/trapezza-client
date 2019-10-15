@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:qrcode_reader/qrcode_reader.dart';
 import "package:graphql_flutter/graphql_flutter.dart";
 import 'package:trapezza_client_app/graphql/GraphqlConfiguration.dart';
 import 'package:trapezza_client_app/graphql/QueryMutation.dart';
+import 'package:trapezza_client_app/pages/CurrentRestaurant.dart';
 
 class Join extends StatefulWidget {
   JoinState createState() {
@@ -12,6 +14,8 @@ class Join extends StatefulWidget {
 
 class JoinState extends State<Join> {
   GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
+
+  bool isResVisible = false;
 
   String _qrCodeData = "";
 
@@ -40,6 +44,31 @@ class JoinState extends State<Join> {
     super.initState();
   }
 
+//  void addClient() {
+//    QueryMutation queryMutation = QueryMutation();
+//    GraphQLClient _client = graphQLConfiguration.clientToQuery();
+//    Future<QueryResult> result = _client.mutate(
+//      MutationOptions(
+//        document: queryMutation.checkSession(_qrCodeData, "1234"),
+//      ),
+//    );
+//
+//    result.then((result) {
+//      if (result.hasErrors) {
+//
+//        for(GraphQLError error in result.errors) {
+//
+//          String e = error.toString();
+//          print('GRAPHQL ERRORS: $e');
+//        }
+//      } else {
+//        bool isSessionValid = result.data["addClient"];
+//
+//        print('session status: $isSessionValid');
+//      }
+//    });
+//  }
+
   void addClient() async {
     QueryMutation queryMutation = QueryMutation();
     GraphQLClient _client = graphQLConfiguration.clientToQuery();
@@ -58,6 +87,10 @@ class JoinState extends State<Join> {
       bool isSessionValid = result.data["addClient"];
 
       print('session status: $isSessionValid');
+
+      setState(() {
+        isResVisible = isSessionValid;
+      });
     }
   }
 
@@ -67,29 +100,38 @@ class JoinState extends State<Join> {
         appBar: new AppBar(
           title: new Text('QR Code Scanner'),
         ),
-        body: new Center(
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: RaisedButton(
-                    color: Colors.blue,
-                    textColor: Colors.white,
-                    splashColor: Colors.blueGrey,
-                    onPressed: scanQrCode,
-                    child: const Text('START SCAN')),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
-                  "Session code: $_qrCodeData",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ],
+        body: switchPage());
+  }
+
+  Widget switchPage() {
+
+    Widget currentRestaurant = CurrentRestaurant();
+
+    Widget qrCodeScan = Center(
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: RaisedButton(
+                color: Colors.blue,
+                textColor: Colors.white,
+                splashColor: Colors.blueGrey,
+                onPressed: scanQrCode,
+                child: const Text('START SCAN')),
           ),
-        ));
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Text(
+              "Session code: $_qrCodeData",
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    return isResVisible ? currentRestaurant : qrCodeScan;
   }
 }
