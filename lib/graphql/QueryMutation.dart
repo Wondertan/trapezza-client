@@ -20,7 +20,7 @@ class QueryMutation {
     """;
   }
 
-  String checkSession(String sessionId, String clientId) {
+  String addClient(String sessionId, String clientId) {
     return """ 
       mutation {
         addClient(session: "$sessionId", client: "$clientId") 
