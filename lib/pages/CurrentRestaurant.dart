@@ -43,7 +43,7 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                 child: Column(
                   children: <Widget>[
                     Container(
-                      padding: new EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
+                      padding: new EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
                       alignment: Alignment.topLeft,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,32 +52,15 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                               'Best place in town',
                               textAlign: TextAlign.center,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 18.0),
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold),
                               maxLines: 2),
-                          Row(
-                            children: <Widget>[
-                              Icon(
-                                  Icons.attach_money,
-                                  color: Colors.black,
-                                  size: 20
-                              ),
-                              Icon(
-                                  Icons.attach_money,
-                                  color: Colors.black,
-                                  size: 20
-                              ),
-                              Icon(
-                                  Icons.attach_money,
-                                  color: Colors.black,
-                                  size: 20
-                              )
-                            ],
-                          )
                         ],
                       )
                     ),
                     Container(
-                      padding: new EdgeInsets.symmetric(horizontal: 8.0),
+                      padding: new EdgeInsets.symmetric(horizontal: 25.0),
                       alignment: Alignment.topLeft,
                       child: Text(
                           'Location 1, Odessa, UA',
@@ -87,7 +70,7 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                           maxLines: 2),
                     ),
                     Container(
-                      padding: new EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
+                      padding: new EdgeInsets.symmetric(horizontal: 25.0, vertical: 8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
@@ -137,22 +120,43 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
               width: 100,
               height: 100,
               margin: new EdgeInsets.symmetric(
-                  horizontal: 5.0, vertical: 5.0),
+                  horizontal: 25.0, vertical: 5.0),
               child: Center(
                   child: Container(
                     width: 100,
                     height: 100,
-                    margin: new EdgeInsets.symmetric(horizontal: 8.0),
+                    margin: new EdgeInsets.symmetric(horizontal: 4.0),
                     child: RawMaterialButton(
-                      fillColor: Colors.deepOrangeAccent,
-                      child: Text(
-                          'Request waiter',
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 16.0),
-                          maxLines: 2),
+                      fillColor: Color(0xfff40c00),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.white,
+                              width: 8.0
+                          ),
+                          shape: BoxShape.circle,
+                        ),
+                        padding: new EdgeInsets.symmetric(vertical: 10.0),
+                        child: Column(
+                          children: <Widget>[
+                            Icon(
+                                Icons.call_end,
+                                color: Colors.white,
+                                size: 25.0
+                            ),
+                            Text(
+                                'Request Waiter',
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13.0),
+                                maxLines: 2)
+                          ],
+                        ),
+                      ),
                       shape: CircleBorder(),
-                      elevation: 0.0,
+                      elevation: 10.0,
                       onPressed: () {},
                     ),
                   )
@@ -164,17 +168,38 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
           color: Color(0xFFF3F3F3),
           child: TabBar(
             controller: _tabController,
-            indicatorColor: Colors.redAccent,
-            labelColor: Colors.redAccent,
+            indicatorColor: Color(0xfff40c00),
+            labelColor: Color(0xfff40c00),
             unselectedLabelStyle: TextStyle(
                 color: Colors.green,
-                decorationColor: Colors.black
+                decorationColor: Colors.grey
             ),
             //isScrollable: true,
             tabs: [
-              Tab(text: "Menu"),
-              Tab(text: "My Bill"),
-              Tab(text: "Participants")
+              Tab(
+                text: "My Bill",
+                icon: Icon(
+                  Icons.monetization_on,
+                  color: Color(0xfff40c00),
+                  size: 25.0,
+                )
+              ),
+              Tab(
+                  text: "Participants",
+                  icon: Icon(
+                    Icons.people,
+                    color: Color(0xfff40c00),
+                    size: 25.0,
+                  )
+              ),
+              Tab(
+                  text: "Menu",
+                  icon: Icon(
+                    Icons.local_dining,
+                    color: Color(0xfff40c00),
+                    size: 25.0,
+                  )
+              )
             ],
           )
         ),
@@ -182,9 +207,9 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
           child: TabBarView(
             controller: _tabController,
             children: [
-              Menu(),
               MyBill(),
-              Participants()
+              Participants(),
+              Menu(),
             ],
           ),
         )
