@@ -20,6 +20,9 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
       length: 3,
       vsync: this,
     );
+
+    // 2 - number of the tab "Menu", opening by default
+    _tabController.animateTo(2);
     super.initState();
   }
 
@@ -66,7 +69,10 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                           'Location 1, Odessa, UA',
                           textAlign: TextAlign.center,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 14.0),
+                          style: TextStyle(
+                              fontSize: 13.0,
+                              color: Colors.grey
+                          ),
                           maxLines: 2),
                     ),
                     Container(
@@ -100,13 +106,16 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                             size: 24.0,
                           ),
                           Container(
-                            padding: new EdgeInsets.symmetric(horizontal: 8.0),
+                            padding: new EdgeInsets.symmetric(horizontal: 4.0),
                             alignment: Alignment.topLeft,
                             child: Text(
                                 '(5 reviews)',
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 14.0),
+                                style: TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.grey
+                                ),
                                 maxLines: 1),
                           ),
                         ],
@@ -117,10 +126,9 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
               ),
             ),
             Container(
-              width: 100,
-              height: 100,
-              margin: new EdgeInsets.symmetric(
-                  horizontal: 25.0, vertical: 5.0),
+              width: 95,
+              height: 95,
+              margin: new EdgeInsets.only(right: 25),
               child: Center(
                   child: Container(
                     width: 100,
