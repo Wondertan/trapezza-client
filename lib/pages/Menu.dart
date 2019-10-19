@@ -61,18 +61,36 @@ class MenuState extends State<Menu> {
               )
           ),
           Container(
-              margin: new EdgeInsets.symmetric(horizontal: 28.0, vertical: 20.0),
-              alignment: Alignment.topLeft,
-              child: Text(
-                  'Menu',
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.redAccent,
-                      fontWeight: FontWeight.bold
-                  ),
-                  maxLines: 1)
+            height: 30,
+            margin: EdgeInsets.only(left: 14, right: 14, top: 16),
+            alignment: Alignment.topLeft,
+            child: FlatButton(
+              onPressed: () {print("View all");},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                      'Menu',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.redAccent,
+                          fontWeight: FontWeight.bold
+                      ),
+                      maxLines: 1),
+                  Text(
+                      'View all',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.redAccent
+                      ),
+                      maxLines: 1),
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: ListView.separated(
