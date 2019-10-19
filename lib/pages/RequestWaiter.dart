@@ -42,7 +42,9 @@ class RequestWaiterState extends State<RequestWaiter> {
               child: RaisedButton(
                   color: Color(0xfff40c00),
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   splashColor: Colors.blueGrey,
                   child: const Text('CANCEL')),
             )
