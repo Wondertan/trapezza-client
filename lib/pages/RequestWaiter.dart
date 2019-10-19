@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class RequestWaiter extends StatefulWidget {
@@ -35,22 +37,28 @@ class RequestWaiterState extends State<RequestWaiter> {
                     color: Colors.grey),
               ),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
-              width: 250,
-              height: 50,
-              child: RaisedButton(
-                  color: Color(0xfff40c00),
-                  textColor: Colors.white,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  splashColor: Colors.blueGrey,
-                  child: const Text('CANCEL')),
-            )
           ],
         ),
       ),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(bottom: 20),
+        width: 200,
+        height: 40,
+        child: RaisedButton(
+          color: Color(0xfff40c00),
+          child: Text(
+              'CANCEL',
+              style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.white
+              )
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
