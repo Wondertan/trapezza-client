@@ -37,3 +37,43 @@ showPopup(BuildContext context, Widget widget, String title,
     ),
   );
 }
+
+showCheckoutPopup(BuildContext context, Widget widget, String title,
+    {BuildContext popupContext}) {
+  Navigator.push(
+    context,
+    CommonPopup(
+      top: 30,
+      left: 30,
+      right: 30,
+      bottom: 30,
+      child: CommonPopupContent(
+        content: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            leading: new Builder(builder: (context) {
+              return IconButton(
+                icon: Icon(Icons.close, size: 35),
+                onPressed: () {
+                  try {
+                    Navigator.pop(context); //close the popup
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+              );
+            }),
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            //brightness: Brightness.light,
+          ),
+          resizeToAvoidBottomPadding: false,
+          body: Container(
+            alignment: Alignment.center,
+            child: widget,
+          ),
+        ),
+      ),
+    ),
+  );
+}
