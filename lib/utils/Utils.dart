@@ -43,7 +43,7 @@ showCheckoutPopup(BuildContext context, Widget widget, String title,
   Navigator.push(
     context,
     CommonPopup(
-      top: 30,
+      top: 150,
       left: 30,
       right: 30,
       bottom: 30,
@@ -51,24 +51,34 @@ showCheckoutPopup(BuildContext context, Widget widget, String title,
         content: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            leading: new Builder(builder: (context) {
-              return IconButton(
-                icon: Icon(Icons.close, size: 35),
-                onPressed: () {
+            title: Container(
+              alignment: Alignment.centerRight,
+              color: Colors.transparent,
+              child: RaisedButton(
+                color: Colors.transparent,
+                elevation: 0.0,
+                child: Icon(
+                    Icons.close,
+                    size: 50,
+                    color: Colors.white
+                ),
+                onPressed: (){
                   try {
                     Navigator.pop(context); //close the popup
                   } catch (e) {
                     print(e);
                   }
                 },
-              );
-            }),
+              ),
+            ),
+            leading: Container(),
             backgroundColor: Colors.transparent,
             elevation: 0.0,
             //brightness: Brightness.light,
           ),
           resizeToAvoidBottomPadding: false,
           body: Container(
+            height: 420,
             alignment: Alignment.center,
             child: widget,
           ),
