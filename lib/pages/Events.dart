@@ -21,6 +21,7 @@ class EventsState extends State<Events> {
       appBar: AppBar(
         backgroundColor: CustomColors.cherry,
         elevation: 0.0,
+        //title: ,
       ),
       body: Container(
         child: Column(
@@ -53,7 +54,7 @@ class EventsState extends State<Events> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.redAccent
+                                    color: CustomColors.cherry
                                 ),
                                 maxLines: 1
                             ),
@@ -150,7 +151,7 @@ class EventsState extends State<Events> {
                                                         textAlign: TextAlign.center,
                                                         overflow: TextOverflow.ellipsis,
                                                         style: TextStyle(
-                                                            fontSize: 14.0,
+                                                            fontSize: 12.0,
                                                             color: CustomColors.darkGrey,
                                                             fontWeight: FontWeight.bold),
                                                         maxLines: 2),
@@ -204,7 +205,7 @@ class EventsState extends State<Events> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 6),
+              margin: EdgeInsets.only(bottom: 4),
               child: FlatButton(
                 onPressed: () {
                 },
@@ -232,7 +233,7 @@ class EventsState extends State<Events> {
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     fontSize: 14.0,
-                                    color: Colors.redAccent
+                                    color: CustomColors.cherry
                                 ),
                                 maxLines: 1
                             ),
@@ -395,7 +396,6 @@ class EventsState extends State<Events> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 6),
               child: FlatButton(
                 onPressed: () {
                 },
@@ -414,6 +414,171 @@ class EventsState extends State<Events> {
                         maxLines: 1)
                   ],
                 ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 0.0),
+              child: SizedBox(
+                  height: 120,
+                  child: ListView.separated(
+                      key: Key('recent reviews list'),
+                      separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(
+                          height: 0,
+                          color: Colors.transparent),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: featuredItems.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          width: 410,
+                          key: Key('recent reviews widget'),
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              margin: EdgeInsets.only(left: 6, bottom: 0),
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Container(
+                                                    margin: EdgeInsets.only(left: 20, bottom: 2),
+                                                    child: CircleAvatar(
+                                                      radius: 25,
+                                                      backgroundImage: NetworkImage('https://i.stack.imgur.com/kdrpp.png'),
+                                                    ),
+                                                  ),
+                                                  Container(
+                                                    child: Column(
+                                                      children: <Widget>[
+                                                        Text(
+                                                            'Walter White',
+                                                            style: TextStyle(
+                                                                color: CustomColors.black,
+                                                                fontSize: 16,
+                                                                fontWeight: FontWeight.bold
+                                                            )
+                                                        ),
+                                                        Container(
+                                                          margin: EdgeInsets.only(left: 14, top: 1),
+                                                          child: Text(
+                                                              'Restaurant Forsage',
+                                                              style: TextStyle(
+                                                                color: CustomColors.darkGrey,
+                                                                fontSize: 12,
+                                                              )
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: new EdgeInsets.symmetric(horizontal: 22.0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                              Icons.star,
+                                              color: CustomColors.yellow,
+                                              size: 22.0
+                                          ),
+                                          Icon(
+                                              Icons.star,
+                                              color: CustomColors.yellow,
+                                              size: 22.0
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: CustomColors.yellow,
+                                            size: 22.0,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: CustomColors.yellow,
+                                            size: 22.0,
+                                          ),
+                                          Icon(
+                                            Icons.star,
+                                            color: CustomColors.yellow,
+                                            size: 22.0,
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 250,
+                                      margin: EdgeInsets.only(top: 6, left: 45, right: 10),
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'This is the best place I’ve ever seen.'
+                                            'The stuff is so polite and fabulous,'
+                                            'location of this place is incredible.'
+                                            'I’m definetely coming back!',
+                                        style: TextStyle(
+                                            color: CustomColors.darkGrey,
+                                            fontSize: 12
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      child: FlatButton(
+                                        splashColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onPressed: () {
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.only(top: 35, right: 5.0),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            children: <Widget>[
+                                              Container(
+                                                margin: EdgeInsets.only(right: 5.0),
+                                                child: Text(
+                                                    'Forsage',
+                                                    textAlign: TextAlign.center,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontSize: 14.0,
+                                                        color: CustomColors.cherry
+                                                    ),
+                                                    maxLines: 1
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.arrow_forward_ios,
+                                                color: Color(0xfff40c00),
+                                                size: 12.0,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                  )
               ),
             ),
           ],
