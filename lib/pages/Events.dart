@@ -21,7 +21,34 @@ class EventsState extends State<Events> {
       appBar: AppBar(
         backgroundColor: CustomColors.cherry,
         elevation: 0.0,
-        //title: ,
+        title: Card(
+          child: Container(
+            margin: EdgeInsets.only(bottom: 15, left: 5, right: 5),
+            height: 20,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Icon(
+                    Icons.search,
+                    color: CustomColors.darkGrey,
+                    size: 20.0,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  child: Icon(
+                    Icons.mic,
+                    color: CustomColors.darkGrey,
+                    size: 20.0,
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
       ),
       body: Container(
         child: Column(
@@ -396,28 +423,24 @@ class EventsState extends State<Events> {
               ),
             ),
             Container(
-              child: FlatButton(
-                onPressed: () {
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Text(
-                        'Recent reviews',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            color: CustomColors.cherry,
-                            fontWeight: FontWeight.bold
-                        ),
-                        maxLines: 1)
-                  ],
-                ),
+              margin: EdgeInsets.only(bottom: 15, left: 18, top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                      'Recent reviews',
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          color: CustomColors.cherry,
+                          fontWeight: FontWeight.bold
+                      ),
+                      maxLines: 1)
+                ],
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 0.0),
               child: SizedBox(
                   height: 120,
                   child: ListView.separated(
