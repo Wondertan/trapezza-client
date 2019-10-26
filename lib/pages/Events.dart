@@ -18,37 +18,40 @@ class EventsState extends State<Events> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: CustomColors.cherry,
-        elevation: 0.0,
-        title: Card(
-          child: Container(
-            margin: EdgeInsets.only(bottom: 15, left: 5, right: 5),
-            height: 20,
-            color: Colors.white,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Icon(
-                    Icons.search,
-                    color: CustomColors.darkGrey,
-                    size: 20.0,
-                  ),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(65.0),
+        child: AppBar(
+            backgroundColor: CustomColors.cherry,
+            elevation: 0.0,
+            title: Card(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 15, left: 5, right: 5),
+                height: 25,
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Icon(
+                        Icons.search,
+                        color: CustomColors.darkGrey,
+                        size: 22.0,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      child: Icon(
+                        Icons.mic,
+                        color: CustomColors.darkGrey,
+                        size: 22.0,
+                      ),
+                    )
+                  ],
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  child: Icon(
-                    Icons.mic,
-                    color: CustomColors.darkGrey,
-                    size: 20.0,
-                  ),
-                )
-              ],
-            ),
-          ),
-        )
+              ),
+            )
+        ),
       ),
       body: Container(
         child: Column(
