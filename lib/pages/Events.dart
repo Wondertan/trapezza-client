@@ -165,7 +165,7 @@ class EventsState extends State<Events> {
                                             decoration: BoxDecoration(
                                               image: DecorationImage(
                                                 image: NetworkImage('https://www.gastronom.ru/binfiles/images/20171229/b54543d9.jpg'),
-                                                fit: BoxFit.fill
+                                                fit: BoxFit.cover
                                               )
                                             ),
                                           ),
@@ -343,7 +343,7 @@ class EventsState extends State<Events> {
                                               decoration: BoxDecoration(
                                                   image: DecorationImage(
                                                       image: NetworkImage('https://www.gastronom.ru/binfiles/images/20171229/b54543d9.jpg'),
-                                                      fit: BoxFit.fill
+                                                      fit: BoxFit.cover
                                                   )
                                               ),
                                             ),
