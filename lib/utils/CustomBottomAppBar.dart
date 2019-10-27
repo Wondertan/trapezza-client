@@ -98,6 +98,8 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
             onTap: () => onPressed(index),
             child: Column(
               mainAxisSize: MainAxisSize.min,
