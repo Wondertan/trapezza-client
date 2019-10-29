@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  statemachine: ^1.6.0
   flutter_spinkit: ^4.0.0
   flutter_svg: ^0.14.3
   uuid: ^2.0.2
