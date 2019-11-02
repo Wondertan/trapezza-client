@@ -60,7 +60,6 @@ class OrderPayedState extends State<OrderPayed> {
               child: Expanded(
                 child: Scrollbar(
                     child: ListView.separated(
-                        key: Key('popular restaurants'),
                         separatorBuilder: (BuildContext context, int index) =>
                             Container(
                               margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
