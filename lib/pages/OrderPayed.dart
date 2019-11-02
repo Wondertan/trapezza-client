@@ -165,26 +165,29 @@ class OrderPayedState extends State<OrderPayed> {
                                             ),
                                           ),
                                           Container(
-                                            margin: EdgeInsets.only(left: 8),
-                                            alignment: Alignment.centerLeft,
-                                            color: Colors.transparent,
-                                            child: RaisedButton(
-                                              color: Colors.white,
-                                              elevation: 0.0,
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius: new BorderRadius.circular(5.0),
-                                                  side: BorderSide(color: CustomColors.whiteGrey)
-                                              ),
-                                              child: Text(
-                                                  'Leave a review',
-                                                  style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: CustomColors.whiteGrey
-                                                  )
-                                              ),
-                                              onPressed: () {
-                                              },
-                                            ),
+                                              margin: EdgeInsets.only(left: 8),
+                                              alignment: Alignment.centerLeft,
+                                              color: Colors.transparent,
+                                              child: SizedBox(
+                                                width: 200,
+                                                child: RaisedButton(
+                                                  color: Colors.white,
+                                                  elevation: 0.0,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius: new BorderRadius.circular(5.0),
+                                                      side: BorderSide(color: CustomColors.whiteGrey)
+                                                  ),
+                                                  child: Text(
+                                                      'Leave a review',
+                                                      style: TextStyle(
+                                                          fontSize: 14.0,
+                                                          color: CustomColors.whiteGrey
+                                                      )
+                                                  ),
+                                                  onPressed: () {
+                                                  },
+                                                ),
+                                              )
                                           )
                                         ],
                                       ),
@@ -199,6 +202,7 @@ class OrderPayedState extends State<OrderPayed> {
               ),
             ),
             Container(
+              margin: EdgeInsets.symmetric(horizontal: 20.0),
               height: 0.4,
               color: CustomColors.darkGrey,
             ),
