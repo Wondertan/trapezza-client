@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:trapezza_client_app/pages/Menu.dart';
-import 'package:trapezza_client_app/pages/MyBill.dart';
-import 'package:trapezza_client_app/pages/Participants.dart';
+import 'package:trapezza_client_app/pages/Review.dart';
+import 'package:trapezza_client_app/pages/Bill.dart';
 
 class CurrentRestaurant extends StatefulWidget {
   CurrentRestaurantState createState() {
@@ -30,6 +30,13 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+
+  @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
   }
 
   @override
@@ -144,7 +151,7 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                           ),
                           shape: BoxShape.circle,
                         ),
-                        padding: new EdgeInsets.symmetric(vertical: 10.0),
+                        padding: EdgeInsets.symmetric(vertical: 10.0),
                         child: Column(
                           children: <Widget>[
                             Icon(
@@ -165,7 +172,9 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                       ),
                       shape: CircleBorder(),
                       elevation: 10.0,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/request_waiter');
+                      },
                     ),
                   )
               ),
@@ -173,6 +182,7 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
           ],
         ),
         Container(
+          height: 70,
           color: Color(0xFFF3F3F3),
           child: TabBar(
             controller: _tabController,
@@ -185,28 +195,61 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
             //isScrollable: true,
             tabs: [
               Tab(
-                text: "My Bill",
-                icon: Icon(
-                  Icons.monetization_on,
-                  color: Color(0xfff40c00),
-                  size: 25.0,
-                )
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Icon(
+                          Icons.stars,
+                          color: Color(0xfff40c00),
+                          size: 25.0,
+                        ),
+                      ),
+                      Container(
+                        child: Text('Review'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Tab(
-                  text: "Participants",
-                  icon: Icon(
-                    Icons.people,
-                    color: Color(0xfff40c00),
-                    size: 25.0,
-                  )
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Icon(
+                          Icons.monetization_on,
+                          color: Color(0xfff40c00),
+                          size: 25.0,
+                        ),
+                      ),
+                      Container(
+                        child: Text('Bill'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Tab(
-                  text: "Menu",
-                  icon: Icon(
-                    Icons.local_dining,
-                    color: Color(0xfff40c00),
-                    size: 25.0,
-                  )
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Icon(
+                          Icons.local_dining,
+                          color: Color(0xfff40c00),
+                          size: 25.0,
+                        ),
+                      ),
+                      Container(
+                        child: Text('Menu'),
+                      ),
+                    ],
+                  ),
+                ),
               )
             ],
           )
@@ -215,8 +258,8 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
           child: TabBarView(
             controller: _tabController,
             children: [
-              MyBill(),
-              Participants(),
+              Review(),
+              Bill(),
               Menu(),
             ],
           ),
