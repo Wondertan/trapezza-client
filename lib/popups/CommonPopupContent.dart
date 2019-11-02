@@ -18,6 +18,13 @@ class _CommonPopupContentState extends State<CommonPopupContent> {
   }
 
   @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       child: widget.content,
