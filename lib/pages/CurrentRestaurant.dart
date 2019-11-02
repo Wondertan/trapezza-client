@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:trapezza_client_app/pages/Menu.dart';
 import 'package:trapezza_client_app/pages/Review.dart';
 import 'package:trapezza_client_app/pages/Bill.dart';
+import 'package:trapezza_client_app/properties/CustomColors.dart';
 
 class CurrentRestaurant extends StatefulWidget {
   CurrentRestaurantState createState() {
@@ -89,27 +90,27 @@ class CurrentRestaurantState extends State<CurrentRestaurant> with SingleTickerP
                         children: <Widget>[
                           Icon(
                               Icons.star,
-                              color: Colors.yellow,
+                              color: CustomColors.yellow,
                               size: 24.0
                           ),
                           Icon(
                               Icons.star,
-                              color: Colors.yellow,
+                              color: CustomColors.yellow,
                               size: 24.0
                           ),
                           Icon(
                             Icons.star,
-                            color: Colors.yellow,
+                            color: CustomColors.yellow,
                             size: 24.0,
                           ),
                           Icon(
                             Icons.star,
-                            color: Colors.yellow,
+                            color: CustomColors.yellow,
                             size: 24.0,
                           ),
                           Icon(
                             Icons.star,
-                            color: Colors.yellow,
+                            color: CustomColors.yellow,
                             size: 24.0,
                           ),
                           Container(
