@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  overlay_support: ^1.0.2
   statemachine: ^1.6.0
   flutter_spinkit: ^4.0.0
   flutter_svg: ^0.14.3
@@ -54,6 +55,7 @@ flutter:
    - lib/assets/svg/join_icon.svg
    - lib/assets/svg/friends_icon.svg
    - lib/assets/svg/profile_icon.svg
+   - lib/assets/svg/plus_people_bill_icon.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
