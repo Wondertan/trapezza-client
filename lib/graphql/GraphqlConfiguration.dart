@@ -2,13 +2,13 @@ import "package:flutter/material.dart";
 import "package:graphql_flutter/graphql_flutter.dart";
 
 class GraphQLConfiguration {
-  static HttpLink httpLink = HttpLink(
-    uri: 'http://192.168.1.56:8080/query',
+  static HttpLink _httpLink = HttpLink(
+    uri: 'http://192.168.0.116:8080/session',
   );
 
-  ValueNotifier<GraphQLClient> client = ValueNotifier(
+  ValueNotifier<GraphQLClient> httpClient = ValueNotifier(
     GraphQLClient(
-      link: httpLink,
+      link: _httpLink,
       cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
     ),
   );
@@ -16,7 +16,21 @@ class GraphQLConfiguration {
   GraphQLClient clientToQuery() {
     return GraphQLClient(
       cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
-      link: httpLink,
+      link: _httpLink,
     );
   }
+
+  static final WebSocketLink _wsLink = WebSocketLink(
+    url: 'ws://192.168.1.55:8080/query',
+    config: SocketClientConfig(
+      autoReconnect: true,
+    ),
+  );
+
+  ValueNotifier<GraphQLClient> wsClient = ValueNotifier(
+    GraphQLClient(
+      link: _wsLink,
+      cache: OptimisticCache(dataIdFromObject: typenameDataIdFromObject),
+    ),
+  );
 }
