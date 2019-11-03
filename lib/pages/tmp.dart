@@ -58,35 +58,40 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
         home: Scaffold(
             body: Container(
+              margin: EdgeInsets.only(top: 100),
               color: Colors.transparent,
               width: 300,
               height: 300,
               child: Center(
-                child: graphql_lib.Subscription(
-                  "test",
-                  subscribeQuery,
-                  builder: ({
-                    bool loading,
-                    dynamic payload,
-                    dynamic error,
-                  }) {
-                    if (payload != null) {
+                child: Column(
+                  children: <Widget>[
+                    graphql_lib.Subscription(
+                      "test",
+                      subscribeQuery,
+                      builder: ({
+                        bool loading,
+                        dynamic payload,
+                        dynamic error,
+                      }) {
+                        if (payload != null) {
 
-                      print(payload);
+                          print(payload);
 
-                      return Expanded(
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          child: Text(payload['updates']['event']['payer']),
-                        ),
-                      );
-                    } else {
-                      print(payload);
+                          return Expanded(
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              child: Text(payload['updates']['event']['payer']),
+                            ),
+                          );
+                        } else {
+                          print(payload);
 
-                      return Text("Fetching Online Users");
-                    }
-                  },
+                          return Text("Fetching Online Users");
+                        }
+                      },
+                    )
+                  ],
                 ),
               ),
             )
