@@ -16,6 +16,13 @@ class EventsState extends State<Events> {
   ];
 
   @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(

@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:trapezza_client_app/properties/CustomColors.dart';
+import 'package:trapezza_client_app/utils/Accessor.dart';
 
 class Checkout extends StatefulWidget {
+  final Accessor _accessor;
+
+  Checkout(this._accessor);
+
   CheckoutState createState() {
     return CheckoutState();
   }
 }
 
 class CheckoutState extends State<Checkout> {
+  @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -63,7 +75,10 @@ class CheckoutState extends State<Checkout> {
                             color: Colors.white,
                             fontWeight: FontWeight.bold)),
                     color: CustomColors.cherry,
-                    onPressed: () {},
+                    onPressed: () {
+                      widget._accessor.waiterCallType = callType.card;
+                      Navigator.popAndPushNamed(context, "/request_waiter");
+                    },
                   ),
                 ),
                 Container(
@@ -85,10 +100,13 @@ class CheckoutState extends State<Checkout> {
                         style: TextStyle(
                             fontSize: 18,
                             fontFamily: 'Roboto',
-                            color: Colors.black,
+                            color: CustomColors.black,
                             fontWeight: FontWeight.bold)),
                     color: CustomColors.grey,
-                    onPressed: () {},
+                    onPressed: () {
+                      widget._accessor.waiterCallType = callType.cash;
+                      Navigator.popAndPushNamed(context, "/request_waiter");
+                    },
                   ),
                 )
               ],

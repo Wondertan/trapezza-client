@@ -1,19 +1,14 @@
-import 'package:trapezza_client_app/types/UserData.dart';
+import 'package:uuid/uuid.dart';
 
 class SessionData {
-  UserData _userData;
-  String _qrCodeData;
+  String userId;
+  String trapezzaId;
 
   SessionData() {
-    _userData = UserData();
-    _qrCodeData = "";
-  }
+    userId = Uuid().v4();
 
-  String get qrCodeData => _qrCodeData;
+    print("USER_ID: $userId");
 
-  UserData get userData => _userData;
-
-  set qrCodeData(String value) {
-    _qrCodeData = value;
+    trapezzaId = "";
   }
 }

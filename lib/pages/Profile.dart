@@ -9,6 +9,13 @@ class Profile extends StatefulWidget {
 class ProfileState extends State<Profile> {
 
   @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.amber,

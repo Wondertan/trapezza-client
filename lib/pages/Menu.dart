@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:trapezza_client_app/utils/Utils.dart';
 
 class Menu extends StatefulWidget {
   MenuState createState() {
@@ -15,6 +16,13 @@ class MenuState extends State<Menu> {
     'https://live.staticflickr.com/2899/33441231301_7c610f4934_b.jpg',
     'https://www.instagram.com/p/BvoI8S0FVuV/media/?size=m'
   ];
+
+  @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +59,7 @@ class MenuState extends State<Menu> {
                                 child: Image.network(
                                   featuredItems[index],
                                   width: 160,
-                                  fit: BoxFit.fill,
+                                  fit: BoxFit.cover,
                                 )
                             ),
                           ],
@@ -65,7 +73,9 @@ class MenuState extends State<Menu> {
             margin: EdgeInsets.only(left: 14, right: 14, top: 16),
             alignment: Alignment.topLeft,
             child: FlatButton(
-              onPressed: () {print("View all");},
+              onPressed: () {
+                showPopup(context, getMenu(), 'Menu');
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -92,21 +102,25 @@ class MenuState extends State<Menu> {
               ),
             ),
           ),
-          Expanded(
-            child: ListView.separated(
-              key: Key('menu'),
-              separatorBuilder: (BuildContext context, int index) => const Divider(height: 2, color: Colors.black),
-              padding: EdgeInsets.symmetric(horizontal: 14.0),
-              itemCount: data.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  color: Colors.black,
-                  child: EntryItem(data[index]),
-                );
-              },
-            ),
-          ),
+          getMenu(),
         ],
+      ),
+    );
+  }
+
+  Widget getMenu() {
+    return Expanded(
+      child: ListView.separated(
+        key: Key('menu'),
+        separatorBuilder: (BuildContext context, int index) => const Divider(height: 2, color: Colors.black),
+        padding: EdgeInsets.symmetric(horizontal: 14.0),
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            color: Colors.black,
+            child: EntryItem(data[index]),
+          );
+        },
       ),
     );
   }

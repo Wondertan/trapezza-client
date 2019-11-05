@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:trapezza_client_app/properties/CustomColors.dart';
+import 'package:trapezza_client_app/utils/Accessor.dart';
 
 class CustomBottomAppBarItem {
   CustomBottomAppBarItem({this.mText});
@@ -9,6 +10,7 @@ class CustomBottomAppBarItem {
 
 class CustomBottomAppBar extends StatefulWidget {
   CustomBottomAppBar({
+    this.accessor,
     this.items,
     this.centerItemText,
     this.height: 50.0,
@@ -22,6 +24,7 @@ class CustomBottomAppBar extends StatefulWidget {
     assert(this.items.length == 2 || this.items.length == 4);
   }
 
+  final Accessor accessor;
   final List<CustomBottomAppBarItem> items;
   final String centerItemText;
   final double height;
@@ -48,6 +51,12 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    widget.accessor.bottomNavBarStatesWrapper.bottomNavBarInActiveState.onEntry(() {
+      setState(() {
+        _selectedIndex = 4;
+      });
+    });
+
     List<Widget> items = List.generate(widget.items.length, (int index) {
       return _buildTabItem(
         item: widget.items[index],
@@ -156,6 +165,13 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
               : CustomColors.darkGrey,
         );
       }
+    }
+  }
+
+  @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
     }
   }
 }

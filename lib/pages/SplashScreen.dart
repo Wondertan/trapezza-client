@@ -5,8 +5,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:trapezza_client_app/app/AppState.dart';
 import 'package:trapezza_client_app/properties/CustomColors.dart';
+import 'package:trapezza_client_app/utils/Accessor.dart';
 
 class SplashScreen extends StatefulWidget {
+
+  final Accessor _accessor;
+
+  SplashScreen(this._accessor);
+
   @override
   SplashScreenState createState() => SplashScreenState();
 }
@@ -18,7 +24,14 @@ class SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(milliseconds: 1500),
             () => Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (BuildContext context) => App())));
+            builder: (BuildContext context) => App(widget._accessor))));
+  }
+
+  @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
   }
 
   @override

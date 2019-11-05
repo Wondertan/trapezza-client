@@ -12,7 +12,7 @@ void main() {
       .then((_) {
         runApp(
           GraphQLProvider(
-            client: graphQLConfiguration.client,
+            client: graphQLConfiguration.wsClient,
             child: CacheProvider(child: AppInitializer()),
           ),
         );

@@ -1,15 +1,13 @@
 class Subscriptions {
-  static final String opSessionUpdates = "sessionUpdates";
+  static final String opTrapezzaSessionUpdates = "sessionUpdates";
 
-  static String onSessionUpdates() {
+  static String onTrapezzaSessionUpdates(String trapezzaId) {
     return '''
-    subscription $opSessionUpdates{
-      updates(id: "DHY1e"){
+    subscription $opTrapezzaSessionUpdates{
+      trapezzaSessionUpdates(id: "$trapezzaId"){
         event{
-          ... on NewGroupEvent {
-            trapezza,
-            payer,
-            type
+          ... on WaiterCallAnswer {
+            waiter
           }
         }
       }

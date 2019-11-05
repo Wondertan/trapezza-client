@@ -8,6 +8,12 @@ class Friends extends StatefulWidget {
 }
 
 class FriendsState extends State<Friends> {
+  @override
+  void setState(fn) {
+    if(this.mounted){
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

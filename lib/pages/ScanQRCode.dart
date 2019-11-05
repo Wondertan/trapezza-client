@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:qrcode_reader/qrcode_reader.dart';
+import 'package:trapezza_client_app/graphql/Mutations.dart';
+import 'package:trapezza_client_app/main.dart';
 import 'package:trapezza_client_app/properties/ButtonNames.dart';
-import 'package:trapezza_client_app/proxies/MainProxy.dart';
-import 'package:trapezza_client_app/types/MainProxyData.dart';
-import 'package:trapezza_client_app/types/StatesWrapper.dart';
+import 'package:trapezza_client_app/properties/CustomColors.dart';
+import 'package:trapezza_client_app/statewrappers/JoinButtonStatesWrapper.dart';
+import 'package:trapezza_client_app/utils/Accessor.dart';
 
 class ScanQRCode extends StatefulWidget {
+  final Accessor _accessor;
+  final updateJoinButton;
 
-  var updateJoinButton;
-
-  ScanQRCode(this.updateJoinButton);
+  ScanQRCode(
+      this._accessor,
+      this.updateJoinButton);
 
   @override
   ScanQRCodeState createState() => ScanQRCodeState();
 }
 
 class ScanQRCodeState extends State<ScanQRCode> {
-  MainProxyData _mainProxyData;
-  StatesWrapper _statesWrapper;
+  @override
+  void setState(fn) {
+    if (this.mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    _mainProxyData = MainProxy.of(context).data;
-    _statesWrapper = MainProxy.of(context).statesWrapper;
-
     return Center(
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -51,23 +58,62 @@ class ScanQRCodeState extends State<ScanQRCode> {
         .setHandlePermissions(true) // default true
         .setExecuteAfterPermissionGranted(true) // default true
         .scan()
-        .catchError((e){
-          print(e);
-      }
-    );
-
-    futureString.then((value) {
-        setState(() {
-            _mainProxyData.sessionData.qrCodeData = value;
-
-            //addClient();
-            _statesWrapper.scanQRCodeSuccessState.enter();
-            widget.updateJoinButton(ButtonNames.checkout);
-          }
-        );
-      }
-    ).catchError((e) {
+        .catchError((e) {
       print(e);
     });
+
+    futureString.then((value) {
+      setState(() {
+        widget._accessor.sessionData.trapezzaId = value;
+
+        print("TRAPEZZA_ID: $value");
+
+        newGroupHandle(value);
+      });
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  newGroupHandle(String trapezzaId) async {
+    GraphQLClient client = graphQLConfiguration.wsClient.value;
+
+    QueryResult result = await client.mutate(
+      MutationOptions(
+        document: Mutations.newGroupOrder(
+            trapezzaId, widget._accessor.sessionData.userId),
+      ),
+    );
+
+    if (result.hasErrors) {
+      for (GraphQLError error in result.errors) {
+        print(error.toString());
+
+        widget._accessor.joinButtonStatesWrapper.scanQRCodeErrorState.enter();
+
+        showSimpleNotification(
+            Container(
+              height: 50,
+              child: Center(
+                child: Text(
+                  'Invalid TrapezzaId!',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18
+                  ),
+                ),
+              ),
+            ),
+          background: CustomColors.green
+        );
+      }
+    } else {
+      bool isOk = result.data["newGroupOrder"];
+
+      print('new group status: $isOk');
+
+      widget._accessor.joinButtonStatesWrapper.scanQRCodeSuccessState.enter();
+      widget.updateJoinButton(ButtonNames.checkout);
+    }
   }
 }

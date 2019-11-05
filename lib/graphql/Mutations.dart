@@ -1,8 +1,8 @@
 class Mutations {
-  static String newGroup(String trapezzaId, String payerId) {
+  static String newGroupOrder(String trapezzaId, String payerId) {
     return """
     mutation{
-      newGroup(trapezza: "$trapezzaId", payer: "$payerId")
+      newGroupOrder(trapezza: "$trapezzaId", payer: "$payerId")
     }
     """;
   }

@@ -21,7 +21,7 @@ class GraphQLConfiguration {
   }
 
   static final WebSocketLink _wsLink = WebSocketLink(
-    url: 'ws://192.168.1.55:8080/query',
+    url: 'ws://192.168.0.55:8080/query',
     config: SocketClientConfig(
       autoReconnect: true,
     ),
